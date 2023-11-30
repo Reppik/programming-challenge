@@ -2,10 +2,10 @@ package de.exxcellent.challenge.reader;
 
 import java.util.ArrayList;
 
-public class JSONReader<K> implements Reader<ArrayList<K>>{
+public class JSONReader implements Reader {
 
     @Override
-    public ArrayList<K> read(String filePath,  Class<?> type) {
+    public ArrayList<?> read(String filePath,  Class<?> type) {
         return new ArrayList<>();
     }
 }

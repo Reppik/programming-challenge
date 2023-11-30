@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class CSVReader<K> implements Reader<ArrayList<K>>{
+public class CSVReader implements Reader {
 
     @Override
-    public ArrayList<K> read(String filePath, Class<?> type) {
+    public ArrayList<?> read(String filePath, Class<?> type) {
         List<List<String>> records = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))){
             String line;
@@ -25,10 +25,10 @@ public class CSVReader<K> implements Reader<ArrayList<K>>{
         }
 
         if(type == Football.class) {
-            return (ArrayList<K>) FileToObjectMapper.mapStringToFootball(records);
+            return FileToObjectMapper.mapStringToFootball(records);
         }
         if(type == Weather.class) {
-            return (ArrayList<K>) FileToObjectMapper.mapStringToWeather(records);
+            return FileToObjectMapper.mapStringToWeather(records);
         }
         return new ArrayList<>();
     }

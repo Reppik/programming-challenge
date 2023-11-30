@@ -25,22 +25,15 @@ import static org.junit.jupiter.api.Assertions.*;
 class AppTest {
 
     private String successLabel = "not successful";
-    private static FileReaderFactory factory;
     private static ArrayList<Weather> weatherList;
     private static ArrayList<Football> footballList;
 
-
-
-
-    private static final String path = "src/main/resources/de/exxcellent/challenge/";
     @BeforeAll
     static void init(){
-        factory = new FileReaderFactory();
-        CSVReader<Weather> weatherCSVReader = (CSVReader<Weather>) factory.createReader(FileType.CSV);
-        weatherList = weatherCSVReader.read(ChallengeConstants.PATH + "weather.csv", Weather.class);
-
-        CSVReader<Football> csvReader = (CSVReader<Football>) factory.createReader(FileType.CSV);
-        footballList = csvReader.read(ChallengeConstants.PATH + "football.csv", Football.class);
+        FileReaderFactory factory = new FileReaderFactory();
+        CSVReader csvReader = (CSVReader) factory.createReader(FileType.CSV);
+        weatherList = (ArrayList<Weather>) csvReader.read(ChallengeConstants.PATH + "weather.csv", Weather.class);
+        footballList = (ArrayList<Football>) csvReader.read(ChallengeConstants.PATH + "football.csv", Football.class);
     }
 
     @BeforeEach
@@ -66,33 +59,29 @@ class AppTest {
     @Test
     void calculateEmptyWeatherList(){
         CalculatorWeather calculator = new CalculatorWeather();
-        Exception ex = assertThrows(IllegalArgumentException.class, ()->{
-            calculator.calculate(new ArrayList<Weather>());
-        });
+        String result = calculator.calculate(new ArrayList<>());
 
-        String expected = "Weather List Data invalid";
-        assertTrue(ex.getMessage().contains(expected));
-    }
+    String expected = "---";
+    assertTrue(result.contains(expected));
+}
 
-    @Test
-    void readFootball(){
+@Test
+void readFootball(){
         assertEquals(footballList.size(), 20);
-    }
-    @Test
-    void calculateFootball(){
-        CalculatorFootball calculator = new CalculatorFootball();
-        assertEquals(calculator.calculate(footballList), "Aston_Villa");
-    }
+}
+@Test
+void calculateFootball(){
+    CalculatorFootball calculator = new CalculatorFootball();
+    assertEquals(calculator.calculate(footballList), "Aston_Villa");
+}
 
-    @Test
-    void calculateEmptyFootballList(){
-        CalculatorFootball calculator = new CalculatorFootball();
-        Exception ex = assertThrows(IllegalArgumentException.class, ()->{
-            calculator.calculate(new ArrayList<Football>());
-        });
+@Test
+void calculateEmptyFootballList(){
+    CalculatorFootball calculator = new CalculatorFootball();
+    String result = calculator.calculate(new ArrayList<>());
 
-        String expected = "Football List Data invalid";
-        assertTrue(ex.getMessage().contains(expected));
+        String expected = "---";
+        assertTrue(result.contains(expected));
     }
 
     @Test
@@ -102,7 +91,25 @@ class AppTest {
 
     @Test
     void runFootball() {
+        System.out.println("test runFootball : ");
         App.main("--football", "football.csv");
+        System.out.println();
     }
+
+    @Test
+    void runWeather() {
+        System.out.println("test runWeather : ");
+        App.main("--weather", "weather.csv");
+        System.out.println();
+    }
+
+
+    @Test
+    void runAll() {
+        System.out.println("test runAll : ");
+        App.main("--all", "weather.csv", "football.csv");
+        System.out.println();
+    }
+
 
 }

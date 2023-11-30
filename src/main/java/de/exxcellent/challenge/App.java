@@ -10,6 +10,7 @@ import de.exxcellent.challenge.reader.FileReaderFactory;
 import de.exxcellent.challenge.reader.FileType;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * The entry class for your solution. This class is only aimed as starting point and not intended as baseline for your software
@@ -26,11 +27,24 @@ public final class App {
     public static void main(String... args) {
 
         FileReaderFactory factory = new FileReaderFactory();
-        CSVReader<Weather> weatherCSVReader = (CSVReader<Weather>) factory.createReader(FileType.CSV);
-        ArrayList<Weather> weatherList = weatherCSVReader.read(ChallengeConstants.PATH + "weather.csv", Weather.class);
+        CSVReader csvReader = (CSVReader) factory.createReader(FileType.CSV);
+        ArrayList<Weather> weatherList = new ArrayList<>();
+        ArrayList<Football> footballList = new ArrayList<>();
 
-        CSVReader<Football> csvReader = (CSVReader<Football>) factory.createReader(FileType.CSV);
-        ArrayList<Football> footballList = csvReader.read(ChallengeConstants.PATH + "football.csv", Football.class);
+        if (args.length > 0) {
+            if (args[0].equals("--football")) {
+                footballList = (ArrayList<Football>) csvReader.read(ChallengeConstants.PATH + args[1], Football.class);
+            } else if (args[0].equals("--weather")) {
+                weatherList = (ArrayList<Weather>) csvReader.read(ChallengeConstants.PATH + args[1], Weather.class);
+            }
+            if (args[0].equals("--all")) {
+                weatherList = (ArrayList<Weather>) csvReader.read(ChallengeConstants.PATH + args[1], Weather.class);
+                footballList = (ArrayList<Football>) csvReader.read(ChallengeConstants.PATH + args[2], Football.class);
+            }
+        } else {
+            weatherList = (ArrayList<Weather>) csvReader.read(ChallengeConstants.PATH + "weather.csv", Weather.class);
+            footballList = (ArrayList<Football>) csvReader.read(ChallengeConstants.PATH + "football.csv", Football.class);
+        }
 
         CalculatorWeather calculatorWeather = new CalculatorWeather();
         CalculatorFootball calculatorFootball = new CalculatorFootball();

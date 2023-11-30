@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class CalculatorFootball implements Calculator<String,Football>{
     @Override
-    public String calculate(ArrayList<Football> football) throws IllegalArgumentException {
+    public String calculate(ArrayList<Football> football) {
         String footballClub = "-1";
         int minimumGoalsDiff = Integer.MAX_VALUE;
         for(int entry = 0; entry < football.size(); entry++){
@@ -18,7 +18,7 @@ public class CalculatorFootball implements Calculator<String,Football>{
             }
         }
 
-        if (footballClub.equals("-1")) throw new IllegalArgumentException("Football List Data invalid");
+        if (footballClub.equals("-1")) return "---";
         return footballClub;
     }
 
