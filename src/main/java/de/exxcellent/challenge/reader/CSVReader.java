@@ -24,8 +24,6 @@ public class CSVReader<K> implements Reader<ArrayList<K>>{
             throw new IllegalArgumentException(e.getMessage());
         }
 
-        System.out.println(filePath);
-
         if(type == Football.class) {
             return (ArrayList<K>) FileToObjectMapper.mapStringToFootball(records);
         }
