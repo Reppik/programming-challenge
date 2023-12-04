@@ -2,6 +2,10 @@ package de.exxcellent.challenge.model;
 
 import java.util.Objects;
 
+/**
+ * This class stores information about a football team, including its name and various game statistics
+ * such as the number of games played, wins, losses, draws, goals scored, goals allowed, and points.
+ */
 public class Football {
     String team;
     int games;
@@ -12,6 +16,17 @@ public class Football {
     int goalsAllowed;
     int points;
 
+    /**
+     * Constructs a new Football object with specified team statistics.
+     * @param team The name of the football team.
+     * @param games The number of games played by the team.
+     * @param wins The number of games won by the team.
+     * @param losses The number of games lost by the team.
+     * @param draws The number of games drawn by the team.
+     * @param goals The number of goals scored by the team.
+     * @param goalsAllowed The number of goals conceded by the team.
+     * @param points The total points earned by the team.
+     */
     public Football(String team, int games, int wins, int losses, int draws, int goals, int goalsAllowed, int points) {
         this.team = team;
         this.games = games;
@@ -23,6 +38,10 @@ public class Football {
         this.points = points;
     }
 
+    /**
+     * Constructs a default Football object with no initial statistics.
+     * All numeric fields are set to zero and String fields are set to null.
+     */
     public Football() {}
 
     public String getTeam() {

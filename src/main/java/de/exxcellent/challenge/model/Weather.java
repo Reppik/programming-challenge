@@ -2,6 +2,10 @@ package de.exxcellent.challenge.model;
 
 import java.util.Objects;
 
+/**
+ * This class stores detailed weather information such as maximum and minimum temperatures,
+ * average temperature, dew point, precipitation and other related data for a specific day.
+ */
 public class Weather {
     private String day;
     private int mxt;
@@ -18,6 +22,23 @@ public class Weather {
     private double mn;
     private double rAvSLP;
 
+    /**
+     * Constructs a new Weather object with specified weather statistics for a particular day.
+     * @param day The day for which the weather statistics are recorded.
+     * @param mxt The maximum temperature recorded on that day.
+     * @param mnt The minimum temperature recorded on that day.
+     * @param avt The average temperature on that day.
+     * @param avdp The average dew point on that day.
+     * @param oneHrPTpcpn The amount of precipitation in one hour on that day.
+     * @param pDir The predominant direction of the wind on that day.
+     * @param avSp The average speed of the wind on that day.
+     * @param dir The direction of the maximum sustained wind on that day.
+     * @param mxS The maximum speed of the wind on that day.
+     * @param skyC The average sky cover on that day.
+     * @param mxR The maximum amount of radiation on that day.
+     * @param mn The minimum amount of radiation on that day.
+     * @param rAvSLP The average sea level pressure on that day.
+     */
     public Weather(String day, int mxt, int mnt, int avt, double avdp, double oneHrPTpcpn, String pDir, double avSp, String dir, int mxS, double skyC, double mxR, double mn, double rAvSLP) {
         this.day = day;
         this.mxt = mxt;
@@ -35,6 +56,10 @@ public class Weather {
         this.rAvSLP = rAvSLP;
     }
 
+    /**
+     * Constructs a default Weather object with no initial statistics.
+     * All numeric fields are set to zero and String fields are set to null.
+     */
     public Weather() {}
 
     public String getDay() {
